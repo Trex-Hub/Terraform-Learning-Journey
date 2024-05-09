@@ -1,0 +1,16 @@
+{
+  "output": {
+    "firstOutputBlock": {
+      "value": "Hello from firstOutputBlock"
+    },
+    "secondOutputBlock": {
+      "value": "Hello from secondOutputBlock"
+    },
+    "thirdOutputBlock": {
+      "value": "Hello from thirdOutputBlock"
+    },
+    "valueRemarkOutput": {
+      "value": "Self Made .tf.json file Similar to index.tf"
+    }
+  }
+}
