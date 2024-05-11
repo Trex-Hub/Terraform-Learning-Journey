@@ -1,8 +1,8 @@
 resource "github_repository" "first-repo-created" {
   name        = "first-repo-created-from-terraform"
   description = "Repo Creation Automation Via Terraform"
-  visibility = "public"
-  auto_init = true
+  visibility  = "public"
+  auto_init   = true
 }
 
 // To revert/delete all the created resources use - terraform destory
@@ -20,3 +20,11 @@ output "repo_url" {
 // Output Access Command - terraform output [output block name]
 // eg. terraform output repo_url
 
+// Terraform Console - terraform console
+// Can be used to check and access variable in console without plan/Apply command Hassle.
+// Helpfull in debugging. 
+// to Exit Terraform Console 'exit' is used. 
+
+
+// Terraform fmt Command - Used to Format the Terraform Files. 
+// terraform fmt 
