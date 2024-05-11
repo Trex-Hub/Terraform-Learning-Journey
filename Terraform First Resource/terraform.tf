@@ -7,17 +7,13 @@ terraform {
   }
 }
 
-provider "github" {}
+provider "github" {
+    token = "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"
+}
 
-resource "github_repository" "first-repo-created-from-terraform" {
+resource "github_repository" "first-repo-created" {
   name        = "first-repo-created-from-terraform"
   description = "Repo Creation Automation Via Terraform"
   visibility = "private"
   auto_init = true
-
-  template {
-    owner                = "github"
-    repository           = "terraform-template-module"
-    include_all_branches = true
-  }
 }
