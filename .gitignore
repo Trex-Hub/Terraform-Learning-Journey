@@ -5,8 +5,6 @@
 *.tfvars
 *.tfvars.json
 
-
-RSA keys
-
-id_rsa
-id_rsa.pub
+# Ignore RSA keys in any directory
+**/id_rsa
+**/id_rsa.pub
