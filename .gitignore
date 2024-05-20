@@ -4,3 +4,9 @@
 # to change depending on the environment.
 *.tfvars
 *.tfvars.json
+
+
+RSA keys
+
+id_rsa
+id_rsa.pub
