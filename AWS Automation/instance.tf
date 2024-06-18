@@ -7,4 +7,5 @@ resource "aws_instance" "First-TF-Instance" {
   tags = {
     Name = "First-TF-Instance"
   }
+  user_data =file("${path.module}/script.sh")
 }
