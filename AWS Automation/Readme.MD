@@ -12,4 +12,8 @@
 # Terraform Taint 
 - Terraform marks resources as taint, which means when running `terraform apply/plan` it recreates the resource rather than modifiying it. 
 
+Recommend -> Terraform Doesn't recommend using terraform taint <resourcetype.resourcename>
+
+Instead -> `terraform apply --replace`
+
 
