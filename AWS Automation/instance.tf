@@ -63,7 +63,22 @@ resource "aws_instance" "First-TF-Instance" {
     # This will run only once when the resource is created
     command = "echo 'Creating Resources...'"
   }
-  
+
+  provisioner "remote-exec" {
+    inline = [ 
+      "ifconfig > ip.text" ,
+      # This will run the command on the EC2 instance and write the output to the file
+      "echo 'Hello World' > hello.txt"
+      # This will write the content to the file on the EC2 instance
+    ]
+    }
+
+  provisioner "remote-exec" {
+    script = "${path.module}/instancescript.sh"
+    
+    # This will run only once when the resource is created
+  }
+
 }
 
 
