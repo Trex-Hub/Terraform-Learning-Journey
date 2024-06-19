@@ -7,5 +7,25 @@ resource "aws_instance" "First-TF-Instance" {
   tags = {
     Name = "First-TF-Instance"
   }
-  user_data =file("${path.module}/script.sh")
+  user_data = file("${path.module}/script.sh")
+
+  connection {
+    type        = "ssh"
+    user        = "ec2-user"
+    private_key = file("${path.module}/id_rsa")
+    host        = self.public_ip
+  }
+  provisioner "file" {
+    source      = "Readme.MD"
+    destination = "/tmp/Readme.MD"
+  }
+  provisioner "file" {
+    content     = "This is test content"
+    destination = "/tmp/Content.MD"
+  }
+  provisioner "file" {
+    source     = "test-folder"
+    destination = "/tmp/test-folder/"
+  }
+
 }
