@@ -28,4 +28,14 @@ resource "aws_instance" "First-TF-Instance" {
     destination = "/tmp/test-folder/"
   }
 
+  provisioner "local-exec" {
+    command = "echo ${self.public_ip} > ip_address.txt " 
+  }
+  provisioner "local-exec" {
+    interpreter = [ 
+      "/usr/bin/python3", "-c"
+     ]
+     command = "print('Hello World')"
+  }
+
 }
