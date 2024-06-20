@@ -1,6 +1,31 @@
+# Fetching the AMI ID
+data "aws_ami" "ubuntu" {
+  most_recent = true
+  owners      = ["${var.owners}"]
+
+  filter {
+    name   = "name"
+    values = ["${var.imgae_name}"]
+  }
+
+  filter {
+    name   = "root-device-type"
+    values = ["${var.root_device_type}"]
+  }
+
+  filter {
+    name   = "virtualization-type"
+    values = ["${var.virtualization_type}"]
+  }
+}
+
+output "ami_id" {
+  value = data.aws_ami.ubuntu.id
+}
+
 # Creating EC2 Instance
 resource "aws_instance" "First-TF-Instance" {
-  ami                    = var.image_id
+  ami                    = data.aws_ami.ubuntu.id
   instance_type          = var.instance_type
   key_name               = aws_key_pair.key-tf.key_name
   vpc_security_group_ids = [aws_security_group.allow_tls.id]
@@ -21,7 +46,7 @@ resource "aws_instance" "First-TF-Instance" {
     host        = self.public_ip
   }
   provisioner "file" {
-    source      = "Readme.MD" # This file should be in the same directory as the instance.tf file
+    source      = "Readme.MD"      # This file should be in the same directory as the instance.tf file
     destination = "/tmp/Readme.MD" # This is the destination path on the EC2 instance
   }
   provisioner "file" {
@@ -51,7 +76,7 @@ resource "aws_instance" "First-TF-Instance" {
     environment = {
       host = "localhost"
     }
-    
+
   }
 
   provisioner "local-exec" {
@@ -65,17 +90,17 @@ resource "aws_instance" "First-TF-Instance" {
   }
 
   provisioner "remote-exec" {
-    inline = [ 
-      "ifconfig > ip.text" ,
+    inline = [
+      "ifconfig > ip.text",
       # This will run the command on the EC2 instance and write the output to the file
       "echo 'Hello World' > hello.txt"
       # This will write the content to the file on the EC2 instance
     ]
-    }
+  }
 
   provisioner "remote-exec" {
     script = "${path.module}/instancescript.sh"
-    
+
     # This will run only once when the resource is created
   }
 
